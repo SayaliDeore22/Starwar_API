@@ -3,17 +3,16 @@ The task 2 goes like following:
 Pull data for  the first movie in star wars
 Write the json data into a file named output.txt
 
-
 SUBTASKS -
 1. Output should be only list of names (first name & last name) of characters
 in the movie.
 2. Output should only print list of planet names used in the movie
 3. Output should only print list of vehicle names used in the movie.
+4. Output should only print list of starship names used in movie.
 """
 
 import json
 import requests
-import argparse
 
 from pprint import pprint
 from typing import Dict, List
@@ -38,7 +37,7 @@ def first_task() -> Dict:
     return result_
 
 
-def second_task(data_:Dict) -> List:
+def second_task(data_: Dict) -> List:
     """pull data from swapi characters sequentially"""
 
     characters = data_.get("characters")  # returns None by default
@@ -92,13 +91,6 @@ def fifth_task(data_: Dict) -> List:
 
 
 if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--film", "--filmnumber", type=int)
-    object1 = parser.parse_args()
-
-    FIRST_FILM_URL = "https://swapi.dev/api/films/{}/".format(object1.film)
-
 
     # first task
     first_result = first_task()
