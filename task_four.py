@@ -16,6 +16,7 @@ For example - "A new hope" movie has following resource endpoints -
 
 
 """
+from multiprocessing.pool import ThreadPool
 
 from resource.r_films import Films               # resource model
 from models.datamodels.py_films import Film_      # pydantic model
@@ -27,7 +28,7 @@ from models.datamodels.py_species import Species_
 
 from dal.db_conn_helper import get_db_conn
 from dal.dml import insert_resource
-from utils.fetch_data import hit_url
+from utils.fetch_data import hit_url,  fetch_char_names
 from utils.timing import timeit
 
 
