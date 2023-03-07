@@ -1,11 +1,13 @@
 """
 uses HTTP GET request to fetch any resource data from a given URL endpoint
 """
-
+"""
+uses HTTP GET request to fetch any resource data from a given URL endpoint
+"""
 import logging
-from typing import Dict, List, Union
-from requests import Response
 import requests
+from typing import List, Dict, Union, Optional
+from requests import Response
 
 
 # logging configuration
@@ -26,20 +28,45 @@ def mylogger(func):
             logging.error("there are issues in fetching details")
 
         return result_
-
     return wrapper
 
 
 @mylogger
-def hit_url(url: str) -> Response:        #provides logs
+def hit_url(url: str) -> Optional[Response]:
+    """hits the API endpoint and returns response if successful"""
+
     response = requests.get(url)
+    print(f"[ INFO ] {response} - {url}")
     if response.status_code != 200:
         response.raise_for_status()
     else:
         return response
 
 
-def fetch_data(urls: List) -> Union[List, Dict]:   #provides data/response
+@mylogger
+def fetch_char_names(url: str) -> str:
+    """
+
+    Args:
+        url (str): url of character
+
+    Returns:
+        name of a character from given url
+
+    """
+    final = []
+    response = requests.get(url)
+    print(f"[ INFO ] {response} - {url}")
+    if response.status_code != 200:
+        response.raise_for_status()
+    else:
+        data = response.json()
+        res = data.get("name")
+        final.append(res)
+    return final
+
+
+def fetch_data(urls: List) -> Union[List, Dict]:
     """fetches data from given urls"""
 
     data = []
@@ -48,3 +75,14 @@ def fetch_data(urls: List) -> Union[List, Dict]:   #provides data/response
         data.append(res.json())
 
     return data
+
+
+def fetch_data_json(url: str) -> Dict:
+    response = requests.get(url)
+    print(f"[ INFO ] {response} - {url}")
+    if response.status_code != 200:
+        response.raise_for_status()
+    else:
+        response.json()
+
+
