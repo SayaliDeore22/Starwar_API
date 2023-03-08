@@ -4,6 +4,7 @@ Create a generator class to produce random numbers
 
 
 import random
+import requests
 
 
 class ProduceChars:
@@ -19,3 +20,4 @@ class ProduceChars:
         while current <= self.limit:
             yield random.randint(self.start, self.end)
             current += 1
+

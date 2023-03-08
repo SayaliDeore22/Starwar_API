@@ -1,2 +1,13 @@
 .idea/
 *.txt
+venv
+*.log
+*.pyc
+output.txt
+dal
+example.log
+*.pyc
+dal
+
+
+
